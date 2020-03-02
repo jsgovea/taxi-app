@@ -3,33 +3,25 @@ import { EmailSignInMutationArgs, EmailSignInResponse } from '../../../types/gra
 import User from '../../../entities/User';
 import createJWT from '../../utils/createJWT';
 
-
 const resolvers: Resolvers = {
     Mutation: {
-        EmailSignIn: async (_, args: EmailSignInMutationArgs): Promise<EmailSignInResponse> => {
-            const { email, password } = args;
+        EmailSignUp: async (_, args: EmailSignInMutationArgs): Promise<EmailSignInResponse> => {
+            const { email } = args;
             try {
-                const user = await User.findOne({ email });
-                if (!user) {
+                const existingUser = await User.findOne({ email });
+                if (existingUser) {
                     return {
                         ok: false,
-                        error: "No user with that email",
+                        error: "You should login instead",
                         token: null
                     }
-                }
-                const checkPassword = await user.comparePassword(password);
-                if (checkPassword) {
-                    const token = createJWT(user.id);
+                } else {
+                    const newUSer = await User.create({ ...args }).save();
+                    const token = createJWT(newUSer.id);
                     return {
                         ok: true,
                         error: null,
                         token
-                    }
-                } else {
-                    return {
-                        ok: false,
-                        error: "Wrong Password",
-                        token: null
                     }
                 }
             } catch (error) {
