@@ -26,7 +26,3 @@ type User {
     lastLat: Float
     lastOrientation: Float
 }
-
-type Query{
-    user: User
-}
