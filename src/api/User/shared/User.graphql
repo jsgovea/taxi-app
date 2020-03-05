@@ -22,6 +22,7 @@ type User {
     messages: [Message]
     rideAsPassenger: [Ride]
     rideAsDriver: [Ride]
+    places: [Place]
     lastLong: Float
     lastLat: Float
     lastOrientation: Float
