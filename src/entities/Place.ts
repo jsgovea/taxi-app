@@ -12,7 +12,7 @@ class Place extends BaseEntity {
     lat: number;
 
     @Column({ type: "double precision", default: 0 })
-    lgn: number;
+    lng: number;
 
     @Column({ type: "text" })
     address: string;

@@ -1,13 +1,13 @@
 type Chat {
-  Id: Int!
-  meesages: [Message]!
+  id: Int!
+  messages: [Message]!
   participants: [User]!
   createdAt: String!
   updatedAt: String
 }
 
 type Message {
-  Id: Int!
+  id: Int!
   text: String!
   chat: Chat!
   user: User!
@@ -23,7 +23,7 @@ type AddPlaceResponse {
 type Mutation {
   AddPlace(name: String!, lat: Float!, lng: Float!, address: String!, isFav: Boolean!): AddPlaceResponse!
   DeletePlace(placeId: Int!): DeletePlaceResponse!
-  EditPlace(placeId: Int!, name: String, isFave: Boolean): EditPlaceResponse!
+  EditPlace(placeId: Int!, name: String, isFav: Boolean): EditPlaceResponse!
   CompleteEmailVerification(key: String!): CompleteEmailVerificationResponse!
   CompletePhoneVerification(phoneNumber: String!, key: String!): CompletePhoneVerificationResponse!
   EmailSignIn(email: String!, password: String!): EmailSignInResponse!
@@ -44,6 +44,24 @@ type DeletePlaceResponse {
 type EditPlaceResponse {
   ok: Boolean!
   error: String
+}
+
+type GetMyPlacesResponse {
+  ok: Boolean!
+  error: String
+  places: [Place]
+}
+
+type Query {
+  GetMyPlaces: GetMyPlacesResponse!
+  GetNearbyDrivers: GetNearbyDriversResponse!
+  GetMyProfile: GetMyProfileResponse!
+}
+
+type GetNearbyDriversResponse {
+  ok: Boolean!
+  error: String
+  drivers: [User]
 }
 
 type Place {
@@ -112,10 +130,6 @@ type GetMyProfileResponse {
   user: User
 }
 
-type Query {
-  GetMyProfile: GetMyProfileResponse!
-}
-
 type StartPhoneVerificationResponse {
   ok: Boolean!
   error: String
@@ -137,8 +151,7 @@ type User {
   verifiedEmail: Boolean!
   firstName: String!
   lastName: String!
-  bio: String
-  facebookId: String
+  fbId: String
   age: Int
   password: String
   phoneNumber: String
@@ -150,13 +163,12 @@ type User {
   isDriving: Boolean!
   isRiding: Boolean!
   isTaken: Boolean!
-  fbId: String
   chat: Chat
   messages: [Message]
-  rideAsPassenger: [Ride]
-  rideAsDriver: [Ride]
+  ridesAsPassenger: [Ride]
+  ridesAsDriver: [Ride]
   places: [Place]
-  lastLong: Float
+  lastLng: Float
   lastLat: Float
   lastOrientation: Float
 }
