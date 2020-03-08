@@ -56,7 +56,7 @@ class User extends BaseEntity {
     lastLat: number;
 
     @Column({ type: "double precision", default: 0 })
-    lastOrientation: number;
+    orientation: number;
 
     @ManyToOne(type => Chat, chat => chat.participants)
     chat: Chat;
