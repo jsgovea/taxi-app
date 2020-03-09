@@ -98,11 +98,10 @@ class User extends BaseEntity {
             this.password = hashedPassword;
         }
     }
+
     private hashPassword(password: string): Promise<string> {
         return bcrypt.hash(password, BCRYPT_ROUNDS);
     }
-
 }
-
 
 export default User;

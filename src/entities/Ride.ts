@@ -14,12 +14,10 @@ class Ride extends BaseEntity {
             "CANCELED",
             "REQUESTING",
             "ONROUTE"
-        ]
+        ],
+        default: "REQUESTING"
     })
     status: rideStatus;
-
-    // @Column({ type: "text" })
-    // status: string
 
     @Column({ type: "text" })
     pickUpAddress: string
@@ -48,10 +46,16 @@ class Ride extends BaseEntity {
     @Column({ type: "text" })
     distance: string;
 
+    @Column({ nullable: true })
+    passengerId: number;
+
     @ManyToOne(type => User, user => user.ridesAsPassenger)
     passenger: User;
 
-    @ManyToOne(type => User, user => user.ridesAsDriver)
+    @Column({ nullable: true })
+    driverId: number;
+
+    @ManyToOne(type => User, user => user.ridesAsDriver, { nullable: true })
     driver: User;
 
     @CreateDateColumn() createdAt: string;
