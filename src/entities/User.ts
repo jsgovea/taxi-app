@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { IsEmail } from 'class-validator';
-import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, BeforeUpdate, ManyToOne, OneToMany } from "typeorm";
+import { Entity, BaseEntity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, BeforeInsert, BeforeUpdate, OneToMany } from "typeorm";
 import Chat from './Chat';
 import Message from './Message';
 import Ride from './Ride';
@@ -58,8 +58,11 @@ class User extends BaseEntity {
     @Column({ type: "double precision", default: 0 })
     orientation: number;
 
-    @ManyToOne(type => Chat, chat => chat.participants)
-    chat: Chat;
+    @OneToMany(type => Chat, chat => chat.passenger)
+    chatsAsPassenger: Chat[];
+
+    @OneToMany(type => Chat, chat => chat.driver)
+    chatsAsDriver: Chat[];
 
     @OneToMany(type => Message, message => message.user)
     messages: Message[];
@@ -69,7 +72,6 @@ class User extends BaseEntity {
 
     @OneToMany(type => Ride, ride => ride.driver)
     ridesAsDriver: Ride[];
-
 
     @OneToMany(type => Place, place => place.user)
     places: Place[];
