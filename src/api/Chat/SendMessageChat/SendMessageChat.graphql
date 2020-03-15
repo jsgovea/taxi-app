@@ -1,0 +1,10 @@
+
+type SendMessageChatResponse{
+    ok: Boolean!
+    error: String,
+    message: Message
+}
+
+type Mutation {
+    SendMessageChat(text: String!, chatId: Int!): SendMessageChatResponse!
+}

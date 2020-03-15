@@ -16,10 +16,11 @@ type User {
     isDriving: Boolean!
     isRiding: Boolean!
     isTaken: Boolean!
-    chat: Chat
     messages: [Message]
     ridesAsPassenger: [Ride]
     ridesAsDriver: [Ride]
+    chatsAsDriver: [Chat]
+    chatsAsPassenger: [Chat]
     places: [Place]
     lastLng: Float
     lastLat: Float
