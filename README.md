@@ -1,6 +1,4 @@
-# uber-clone
-
-Server for the (N)Uber Clone Course on Nomad Academy. GraphQL, Typescript, NodeJS
+# taxi-app
 
 ## Resolvers
 
@@ -45,8 +43,3 @@ Server for the (N)Uber Clone Course on Nomad Academy. GraphQL, Typescript, NodeJ
 - [x] Get Chat Room Messages
 - [x] Subscribe to Chat Room Messages
 - [ ] Send a Chat Message
-
-## Code Challenge
-
-- [ ] Get Ride History
-- [ ] See Ride Detail
